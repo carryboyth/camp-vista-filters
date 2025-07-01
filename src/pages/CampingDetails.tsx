@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { ArrowLeft, Star, Share, Heart, MapPin, Users, Car, Tent, Wifi, Bath, Utensils, Calendar, Clock, Shield, PawPrint, PartyPopper } from 'lucide-react';
@@ -173,7 +172,7 @@ const CampingDetails = () => {
             <div>
               <h3 className="text-xl font-semibold mb-4">What to expect</h3>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                {campingData.whatToExpected.map((item, index) => (
+                {campingData.whatToExpect.map((item, index) => (
                   <div key={index} className="flex items-start space-x-3">
                     <span className="text-2xl">{item.icon}</span>
                     <div>
