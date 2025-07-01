@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { MapPin, Star, Wifi, Car, Tent, Home, Users, Heart, Fish, Mountain, Eye } from 'lucide-react';
+import { DateRange } from 'react-day-picker';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Card, CardContent } from '@/components/ui/card';
@@ -13,11 +14,6 @@ interface FilterState {
   amenities: string[];
   activities: string[];
   petFriendly: boolean;
-}
-
-interface DateRange {
-  from?: Date;
-  to?: Date;
 }
 
 interface GuestCounts {
@@ -35,7 +31,7 @@ const Index = () => {
   });
 
   const [searchLocation, setSearchLocation] = useState('');
-  const [dateRange, setDateRange] = useState<DateRange>({});
+  const [dateRange, setDateRange] = useState<DateRange | undefined>(undefined);
   const [guestCounts, setGuestCounts] = useState<GuestCounts>({
     adults: 0,
     children: 0,
