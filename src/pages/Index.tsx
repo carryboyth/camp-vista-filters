@@ -1,9 +1,11 @@
+
 import React, { useState } from 'react';
 import { MapPin, Star, Wifi, Car, Tent, Home, Users, Heart, Fish, Mountain, Eye } from 'lucide-react';
 import { DateRange } from 'react-day-picker';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Card, CardContent } from '@/components/ui/card';
+import { Link } from 'react-router-dom';
 import FilterSection from '@/components/FilterSection';
 import LocationPicker from '@/components/LocationPicker';
 import DateRangePicker from '@/components/DateRangePicker';
@@ -155,60 +157,62 @@ const Index = () => {
         {/* Results Grid */}
         <div className="grid gap-6">
           {mockResults.map((result) => (
-            <Card key={result.id} className="hover:shadow-lg transition-shadow cursor-pointer">
-              <CardContent className="p-0">
-                <div className="flex">
-                  <div className="w-80 h-48 bg-gray-200 rounded-l-lg overflow-hidden">
-                    <img
-                      src={result.image}
-                      alt={result.name}
-                      className="w-full h-full object-cover"
-                    />
-                  </div>
-                  <div className="flex-1 p-6">
-                    <div className="flex justify-between items-start mb-2">
-                      <div>
-                        <h3 className="text-lg font-semibold text-gray-900 mb-1">
-                          {result.name}
-                        </h3>
-                        <div className="flex items-center text-gray-600 mb-2">
-                          <MapPin className="h-4 w-4 mr-1" />
-                          <span className="text-sm">{result.location}</span>
+            <Link key={result.id} to={`/camping/${result.id}`}>
+              <Card className="hover:shadow-lg transition-shadow cursor-pointer">
+                <CardContent className="p-0">
+                  <div className="flex">
+                    <div className="w-80 h-48 bg-gray-200 rounded-l-lg overflow-hidden">
+                      <img
+                        src={result.image}
+                        alt={result.name}
+                        className="w-full h-full object-cover"
+                      />
+                    </div>
+                    <div className="flex-1 p-6">
+                      <div className="flex justify-between items-start mb-2">
+                        <div>
+                          <h3 className="text-lg font-semibold text-gray-900 mb-1">
+                            {result.name}
+                          </h3>
+                          <div className="flex items-center text-gray-600 mb-2">
+                            <MapPin className="h-4 w-4 mr-1" />
+                            <span className="text-sm">{result.location}</span>
+                          </div>
+                        </div>
+                        <div className="text-right">
+                          <div className="flex items-center mb-1">
+                            <Star className="h-4 w-4 text-yellow-400 mr-1" />
+                            <span className="text-sm font-medium">{result.rating}</span>
+                          </div>
+                          <Badge variant="secondary">{result.type}</Badge>
                         </div>
                       </div>
-                      <div className="text-right">
-                        <div className="flex items-center mb-1">
-                          <Star className="h-4 w-4 text-yellow-400 mr-1" />
-                          <span className="text-sm font-medium">{result.rating}</span>
-                        </div>
-                        <Badge variant="secondary">{result.type}</Badge>
+                      
+                      <div className="flex flex-wrap gap-2 mb-4">
+                        {result.amenities.map((amenity) => (
+                          <Badge key={amenity} variant="outline" className="text-xs">
+                            {amenity}
+                          </Badge>
+                        ))}
                       </div>
-                    </div>
-                    
-                    <div className="flex flex-wrap gap-2 mb-4">
-                      {result.amenities.map((amenity) => (
-                        <Badge key={amenity} variant="outline" className="text-xs">
-                          {amenity}
-                        </Badge>
-                      ))}
-                    </div>
 
-                    <div className="flex justify-between items-center">
-                      <div className="flex items-center">
-                        <Users className="h-4 w-4 text-gray-400 mr-1" />
-                        <span className="text-sm text-gray-600">Up to 4 guests</span>
-                      </div>
-                      <div className="text-right">
-                        <div className="text-2xl font-bold text-gray-900">
-                          ${result.price}
+                      <div className="flex justify-between items-center">
+                        <div className="flex items-center">
+                          <Users className="h-4 w-4 text-gray-400 mr-1" />
+                          <span className="text-sm text-gray-600">Up to 4 guests</span>
                         </div>
-                        <div className="text-sm text-gray-600">per night</div>
+                        <div className="text-right">
+                          <div className="text-2xl font-bold text-gray-900">
+                            ${result.price}
+                          </div>
+                          <div className="text-sm text-gray-600">per night</div>
+                        </div>
                       </div>
                     </div>
                   </div>
-                </div>
-              </CardContent>
-            </Card>
+                </CardContent>
+              </Card>
+            </Link>
           ))}
         </div>
 
