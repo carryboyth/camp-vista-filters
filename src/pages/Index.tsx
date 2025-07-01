@@ -1,17 +1,29 @@
-
 import React, { useState } from 'react';
-import { Search, MapPin, Star, Wifi, Car, Tent, Home, Users, Heart, Fish, Mountain, Eye } from 'lucide-react';
+import { MapPin, Star, Wifi, Car, Tent, Home, Users, Heart, Fish, Mountain, Eye } from 'lucide-react';
 import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
 import { Badge } from '@/components/ui/badge';
 import { Card, CardContent } from '@/components/ui/card';
 import FilterSection from '@/components/FilterSection';
+import LocationPicker from '@/components/LocationPicker';
+import DateRangePicker from '@/components/DateRangePicker';
+import GuestPicker from '@/components/GuestPicker';
 
 interface FilterState {
   accommodationType: string[];
   amenities: string[];
   activities: string[];
   petFriendly: boolean;
+}
+
+interface DateRange {
+  from?: Date;
+  to?: Date;
+}
+
+interface GuestCounts {
+  adults: number;
+  children: number;
+  pets: number;
 }
 
 const Index = () => {
@@ -22,7 +34,13 @@ const Index = () => {
     petFriendly: false,
   });
 
-  const [searchQuery, setSearchQuery] = useState('');
+  const [searchLocation, setSearchLocation] = useState('');
+  const [dateRange, setDateRange] = useState<DateRange>({});
+  const [guestCounts, setGuestCounts] = useState<GuestCounts>({
+    adults: 0,
+    children: 0,
+    pets: 0,
+  });
 
   const handleFilterChange = (category: string, value: string | boolean) => {
     if (category === 'petFriendly') {
@@ -94,31 +112,20 @@ const Index = () => {
       <div className="bg-white border-b border-gray-200">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
           <div className="flex gap-4 items-center">
-            {/* Search Bar */}
-            <div className="flex-1 relative">
-              <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 h-5 w-5" />
-              <Input
-                type="text"
-                placeholder="Where to?"
-                value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
-                className="pl-10 pr-4 py-3 text-base w-full"
-              />
-            </div>
+            <LocationPicker 
+              value={searchLocation} 
+              onChange={setSearchLocation} 
+            />
             
-            {/* Date Inputs */}
-            <div className="flex gap-2">
-              <Input
-                type="text"
-                placeholder="Add dates"
-                className="w-32 py-3"
-              />
-              <Input
-                type="text"
-                placeholder="Add guests"
-                className="w-32 py-3"
-              />
-            </div>
+            <DateRangePicker 
+              value={dateRange} 
+              onChange={setDateRange} 
+            />
+            
+            <GuestPicker 
+              value={guestCounts} 
+              onChange={setGuestCounts} 
+            />
             
             <Button className="bg-red-600 hover:bg-red-700 px-8 py-3">
               🧭
