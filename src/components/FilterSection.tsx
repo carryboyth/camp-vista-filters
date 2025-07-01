@@ -23,25 +23,25 @@ const FilterSection = ({ filters, onFilterChange }: FilterSectionProps) => {
 
   const campingStyles = [
     { 
-      id: 'tent', 
-      label: 'Tent', 
+      id: 'campsite', 
+      label: 'ลานกางเต็นท์ (Camp Site)', 
       icon: Tent, 
-      description: 'Pitch your own tent',
+      description: 'พื้นที่โล่งสำหรับลูกค้านำเต็นท์มาเอง',
       image: '⛺'
     },
     { 
       id: 'rv', 
-      label: 'RV', 
+      label: 'จุดจอดรถบ้าน / คาราวาน (RV / Campervan site)', 
       icon: Car, 
-      description: 'Find places that fit your vehicle',
+      description: 'รองรับการจอดรถบ้าน พร้อมระบบไฟ/น้ำ',
       image: '🚐'
     },
     { 
-      id: 'glamping', 
-      label: 'Glamping or lodging', 
+      id: 'hotel', 
+      label: 'บ้านพัก / Hotel', 
       icon: Home, 
-      description: 'Accommodations provided',
-      image: '🏕️'
+      description: 'ที่พักพร้อมสิ่งอำนวยความสะดวก',
+      image: '🏨'
     }
   ];
 
