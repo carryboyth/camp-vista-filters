@@ -60,7 +60,7 @@ const Index = () => {
       location: 'Colorado Springs, CO',
       rating: 4.8,
       price: 45,
-      image: '/placeholder.svg',
+      image: '/lovable-uploads/9210e500-1c85-4125-a620-f9b9c5edd9ec.png',
       amenities: ['Wi-Fi', 'Showers', 'Toilet'],
       type: 'Campsite'
     },
@@ -70,7 +70,7 @@ const Index = () => {
       location: 'Aspen, CO',
       rating: 4.6,
       price: 75,
-      image: '/placeholder.svg',
+      image: '/lovable-uploads/44879b85-24d0-409c-9971-771f83590e55.png',
       amenities: ['Wi-Fi', 'Parking', 'Showers'],
       type: 'RV Site'
     },
@@ -80,7 +80,7 @@ const Index = () => {
       location: 'Vail, CO',
       rating: 4.9,
       price: 120,
-      image: '/placeholder.svg',
+      image: '/lovable-uploads/7661dd8e-ed46-4e8a-abeb-f96348ea5ef8.png',
       amenities: ['Wi-Fi', 'Toilet', 'Parking'],
       type: 'Cabin'
     }
