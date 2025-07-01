@@ -93,8 +93,11 @@ const Index = () => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-16">
             <div className="flex items-center">
-              <Tent className="h-8 w-8 text-green-600 mr-3" />
-              <h1 className="text-2xl font-bold text-gray-900">CampBooker</h1>
+              <img 
+                src="/lovable-uploads/c7640b69-efe4-4e92-83ba-c7ac7e500c48.png" 
+                alt="RVN CAMP" 
+                className="h-8 mr-3"
+              />
             </div>
             <nav className="hidden md:flex space-x-8">
               <a href="#" className="text-gray-600 hover:text-gray-900 px-3 py-2 rounded-md text-sm font-medium">Explore</a>
