@@ -21,10 +21,11 @@ const CampingDetails = () => {
     hostExperience: '29 Guests trips',
     price: 56,
     images: [
-      '/placeholder.svg',
-      '/placeholder.svg',
-      '/placeholder.svg',
-      '/placeholder.svg'
+      '/lovable-uploads/7327a93a-9c6a-4456-99ed-23c5df2e8f79.png',
+      '/lovable-uploads/af068165-53ae-4633-808d-003f172fd45b.png',
+      '/lovable-uploads/1128f092-17a4-440d-90b7-73c4060166ee.png',
+      '/lovable-uploads/7f25e33f-abe1-4bbd-9a7d-22ac42274083.png',
+      '/lovable-uploads/e475da25-77ea-4f8c-ab2e-911be413da3a.png'
     ],
     description: 'Come and stay in our affordable, clean and convenient suburban location in Australia\'s sunshine State! We are 10 minutes from Queensland\'s iconic theme parks, go-karting track and Brisbane and Gold Coast Beaches and parks. We\'re one of the few camp/site close to the CBD - offering easy access to the vibrant city of Brisbane via a comfortable bus ride.',
     vehicleDetails: [
@@ -92,7 +93,7 @@ const CampingDetails = () => {
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         {/* Title Section */}
-        <div className="mb-6">
+        <div className="mb-8">
           <h1 className="text-3xl font-bold text-gray-900 mb-2">{campingData.name}</h1>
           <div className="flex items-center space-x-4 text-sm text-gray-600">
             <div className="flex items-center">
@@ -107,33 +108,35 @@ const CampingDetails = () => {
           </div>
         </div>
 
-        {/* Image Gallery */}
-        <div className="grid grid-cols-4 gap-2 mb-8 h-96">
-          <div className="col-span-2 row-span-2">
-            <img
-              src={campingData.images[0]}
-              alt="Main campground view"
-              className="w-full h-full object-cover rounded-l-lg"
-            />
-          </div>
-          <div className="grid grid-cols-2 col-span-2 gap-2">
-            {campingData.images.slice(1).map((image, index) => (
+        {/* Image Gallery Section */}
+        <div className="mb-12">
+          <div className="grid grid-cols-4 gap-2 h-96">
+            <div className="col-span-2 row-span-2">
               <img
-                key={index}
-                src={image}
-                alt={`Campground view ${index + 2}`}
-                className="w-full h-full object-cover rounded-r-lg"
+                src={campingData.images[0]}
+                alt="Main campground view"
+                className="w-full h-full object-cover rounded-l-lg"
               />
-            ))}
+            </div>
+            <div className="grid grid-cols-2 col-span-2 gap-2">
+              {campingData.images.slice(1, 5).map((image, index) => (
+                <img
+                  key={index}
+                  src={image}
+                  alt={`Campground view ${index + 2}`}
+                  className={`w-full h-full object-cover ${index === 1 || index === 3 ? 'rounded-r-lg' : ''}`}
+                />
+              ))}
+            </div>
           </div>
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
           {/* Main Content */}
           <div className="lg:col-span-2 space-y-8">
-            {/* Host Info */}
+            {/* Host Info & Description Section */}
             <div>
-              <div className="flex items-center space-x-4 mb-4">
+              <div className="flex items-center space-x-4 mb-6">
                 <div className="w-12 h-12 bg-teal-600 rounded-full flex items-center justify-center">
                   <span className="text-white font-bold text-lg">A</span>
                 </div>
@@ -142,7 +145,7 @@ const CampingDetails = () => {
                   <p className="text-gray-600 text-sm">{campingData.hostExperience}</p>
                 </div>
               </div>
-              <p className="text-gray-700 leading-relaxed">{campingData.description}</p>
+              <p className="text-gray-700 leading-relaxed mb-4">{campingData.description}</p>
               <Button variant="link" className="p-0 h-auto text-sm">Show more →</Button>
             </div>
 
@@ -170,7 +173,7 @@ const CampingDetails = () => {
             <div>
               <h3 className="text-xl font-semibold mb-4">What to expect</h3>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                {campingData.whatToExpect.map((item, index) => (
+                {campingData.whatToExpected.map((item, index) => (
                   <div key={index} className="flex items-start space-x-3">
                     <span className="text-2xl">{item.icon}</span>
                     <div>
