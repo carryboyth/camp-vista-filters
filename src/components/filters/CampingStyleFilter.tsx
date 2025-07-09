@@ -1,5 +1,5 @@
 
-import React from 'react';
+import React, { useState } from 'react';
 import { X } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
@@ -9,6 +9,7 @@ import {
   PopoverTrigger,
 } from "@/components/ui/popover";
 import { campingStyles } from '@/utils/campingData';
+import RVDetailsDialog, { RVDetails } from './RVDetailsDialog';
 
 interface CampingStyleFilterProps {
   isOpen: boolean;
@@ -25,10 +26,24 @@ const CampingStyleFilter = ({
   onSelectionChange,
   selectedCount
 }: CampingStyleFilterProps) => {
+  const [showRVDialog, setShowRVDialog] = useState(false);
+
   const handleClearAll = () => {
     selectedTypes.forEach(type => {
       onSelectionChange(type);
     });
+  };
+
+  const handleStyleSelection = (styleId: string) => {
+    if (styleId === 'rv') {
+      setShowRVDialog(true);
+    } else {
+      onSelectionChange(styleId);
+    }
+  };
+
+  const handleRVDetailsSave = (details: RVDetails) => {
+    onSelectionChange('rv');
   };
 
   return (
@@ -67,7 +82,7 @@ const CampingStyleFilter = ({
                   className={`cursor-pointer transition-all hover:shadow-md ${
                     isSelected ? 'ring-2 ring-green-600 bg-green-50' : 'hover:border-gray-300'
                   }`}
-                  onClick={() => onSelectionChange(style.id)}
+                  onClick={() => handleStyleSelection(style.id)}
                 >
                   <CardContent className="p-4">
                     <div className="flex items-center space-x-3">
@@ -104,6 +119,12 @@ const CampingStyleFilter = ({
           </div>
         </div>
       </PopoverContent>
+
+      <RVDetailsDialog 
+        open={showRVDialog}
+        onOpenChange={setShowRVDialog}
+        onSave={handleRVDetailsSave}
+      />
     </Popover>
   );
 };
