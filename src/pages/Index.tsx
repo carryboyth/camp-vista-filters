@@ -1,6 +1,6 @@
 
 import React, { useState } from 'react';
-import { MapPin, Star, Wifi, Car, Tent, Home, Users, Heart, Fish, Mountain, Eye } from 'lucide-react';
+import { MapPin, Star, Wifi, Car, Tent, Home, Users, Heart, Fish, Mountain, Eye, Menu, X } from 'lucide-react';
 import { DateRange } from 'react-day-picker';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
@@ -31,6 +31,8 @@ const Index = () => {
     activities: [],
     petFriendly: false,
   });
+
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   const [searchLocation, setSearchLocation] = useState('');
   const [dateRange, setDateRange] = useState<DateRange | undefined>(undefined);
@@ -96,40 +98,73 @@ const Index = () => {
               <img 
                 src="/lovable-uploads/c7640b69-efe4-4e92-83ba-c7ac7e500c48.png" 
                 alt="RVN CAMP" 
-                className="h-8 mr-3"
+                className="h-6 sm:h-8 mr-3"
               />
             </div>
+            
+            {/* Desktop Navigation */}
             <nav className="hidden md:flex space-x-8">
               <a href="#" className="text-gray-600 hover:text-gray-900 px-3 py-2 rounded-md text-sm font-medium">Explore</a>
               <a href="#" className="text-gray-600 hover:text-gray-900 px-3 py-2 rounded-md text-sm font-medium">List Your Property</a>
               <a href="#" className="text-gray-600 hover:text-gray-900 px-3 py-2 rounded-md text-sm font-medium">Help</a>
             </nav>
-            <Button variant="outline" size="sm">Sign In</Button>
+            
+            <div className="flex items-center">
+              <Button variant="outline" size="sm" className="hidden sm:inline-flex">Sign In</Button>
+              
+              {/* Mobile menu button */}
+              <Button
+                variant="ghost"
+                size="sm"
+                className="md:hidden ml-2"
+                onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+              >
+                {mobileMenuOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
+              </Button>
+            </div>
           </div>
+          
+          {/* Mobile Navigation */}
+          {mobileMenuOpen && (
+            <div className="md:hidden border-t border-gray-200 py-4">
+              <div className="flex flex-col space-y-2">
+                <a href="#" className="text-gray-600 hover:text-gray-900 px-3 py-2 rounded-md text-sm font-medium">Explore</a>
+                <a href="#" className="text-gray-600 hover:text-gray-900 px-3 py-2 rounded-md text-sm font-medium">List Your Property</a>
+                <a href="#" className="text-gray-600 hover:text-gray-900 px-3 py-2 rounded-md text-sm font-medium">Help</a>
+                <Button variant="outline" size="sm" className="mx-3 mt-2 self-start">Sign In</Button>
+              </div>
+            </div>
+          )}
         </div>
       </header>
 
       {/* Search Section */}
       <div className="bg-white border-b border-gray-200">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
-          <div className="flex gap-4 items-center">
-            <LocationPicker 
-              value={searchLocation} 
-              onChange={setSearchLocation} 
-            />
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 md:py-6">
+          <div className="flex flex-col md:flex-row gap-3 md:gap-4 md:items-center">
+            <div className="flex-1">
+              <LocationPicker 
+                value={searchLocation} 
+                onChange={setSearchLocation} 
+              />
+            </div>
             
-            <DateRangePicker 
-              value={dateRange} 
-              onChange={setDateRange} 
-            />
+            <div className="flex-1">
+              <DateRangePicker 
+                value={dateRange} 
+                onChange={setDateRange} 
+              />
+            </div>
             
-            <GuestPicker 
-              value={guestCounts} 
-              onChange={setGuestCounts} 
-            />
+            <div className="flex-1">
+              <GuestPicker 
+                value={guestCounts} 
+                onChange={setGuestCounts} 
+              />
+            </div>
             
-            <Button className="bg-red-600 hover:bg-red-700 px-8 py-3">
-              🧭
+            <Button className="bg-red-600 hover:bg-red-700 px-6 md:px-8 py-3 w-full md:w-auto">
+              🧭 Search
             </Button>
           </div>
         </div>
@@ -144,11 +179,11 @@ const Index = () => {
       {/* Main Content */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         <div className="mb-6">
-          <div className="flex items-center justify-between">
-            <h2 className="text-xl font-semibold text-gray-900">
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+            <h2 className="text-lg sm:text-xl font-semibold text-gray-900">
               {mockResults.length} camping spots found
             </h2>
-            <select className="border border-gray-300 rounded-md px-3 py-2 text-sm">
+            <select className="border border-gray-300 rounded-md px-3 py-2 text-sm w-full sm:w-auto">
               <option>Sort by: Best Match</option>
               <option>Price: Low to High</option>
               <option>Price: High to Low</option>
@@ -161,19 +196,19 @@ const Index = () => {
         <div className="grid gap-6">
           {mockResults.map((result) => (
             <Link key={result.id} to={`/camping/${result.id}`}>
-              <Card className="hover:shadow-lg transition-shadow cursor-pointer">
+                <Card className="hover:shadow-lg transition-shadow cursor-pointer">
                 <CardContent className="p-0">
-                  <div className="flex">
-                    <div className="w-80 h-48 bg-gray-200 rounded-l-lg overflow-hidden">
+                  <div className="flex flex-col md:flex-row">
+                    <div className="w-full md:w-80 h-48 bg-gray-200 rounded-t-lg md:rounded-l-lg md:rounded-t-none overflow-hidden">
                       <img
                         src={result.image}
                         alt={result.name}
                         className="w-full h-full object-cover"
                       />
                     </div>
-                    <div className="flex-1 p-6">
-                      <div className="flex justify-between items-start mb-2">
-                        <div>
+                    <div className="flex-1 p-4 md:p-6">
+                      <div className="flex flex-col sm:flex-row sm:justify-between sm:items-start mb-2 gap-2">
+                        <div className="flex-1">
                           <h3 className="text-lg font-semibold text-gray-900 mb-1">
                             {result.name}
                           </h3>
@@ -182,8 +217,8 @@ const Index = () => {
                             <span className="text-sm">{result.location}</span>
                           </div>
                         </div>
-                        <div className="text-right">
-                          <div className="flex items-center mb-1">
+                        <div className="flex sm:flex-col sm:text-right items-center sm:items-end gap-2">
+                          <div className="flex items-center">
                             <Star className="h-4 w-4 text-yellow-400 mr-1" />
                             <span className="text-sm font-medium">{result.rating}</span>
                           </div>
@@ -199,13 +234,13 @@ const Index = () => {
                         ))}
                       </div>
 
-                      <div className="flex justify-between items-center">
+                      <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-2">
                         <div className="flex items-center">
                           <Users className="h-4 w-4 text-gray-400 mr-1" />
                           <span className="text-sm text-gray-600">Up to 4 guests</span>
                         </div>
-                        <div className="text-right">
-                          <div className="text-2xl font-bold text-gray-900">
+                        <div className="flex items-center sm:block sm:text-right">
+                          <div className="text-xl sm:text-2xl font-bold text-gray-900 mr-2 sm:mr-0">
                             ${result.price}
                           </div>
                           <div className="text-sm text-gray-600">per night</div>
