@@ -35,9 +35,9 @@ const FilterSection = ({ filters, onFilterChange }: FilterSectionProps) => {
   };
 
   return (
-    <div className="bg-white border-b border-gray-200 py-3 md:py-4">
+    <div className="bg-white border-b border-gray-200 py-4">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex flex-wrap gap-2 md:gap-3">
+        <div className="flex flex-wrap gap-3">
           {/* Camping Style Filter */}
           <CampingStyleFilter
             isOpen={openPopover === 'camping-style'}
@@ -60,14 +60,14 @@ const FilterSection = ({ filters, onFilterChange }: FilterSectionProps) => {
           {/* Other Filters */}
           <Button 
             variant="outline"
-            className="h-9 md:h-10 px-3 md:px-4 text-xs md:text-sm font-medium border-gray-300 hover:border-gray-400"
+            className="h-10 px-4 text-sm font-medium border-gray-300 hover:border-gray-400"
           >
             Pets allowed
           </Button>
 
           <Button 
             variant="outline"
-            className="h-9 md:h-10 px-3 md:px-4 text-xs md:text-sm font-medium border-gray-300 hover:border-gray-400"
+            className="h-10 px-4 text-sm font-medium border-gray-300 hover:border-gray-400"
           >
             Instant book
           </Button>
